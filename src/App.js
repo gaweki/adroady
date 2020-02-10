@@ -1,24 +1,43 @@
-import React from 'react';
+import React, { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-function App() {
+
+const data = [
+  {
+    id: 1,
+    title : "Judul 1",
+    description : "Description For Judul 1"
+  },
+  {
+    id: 2,
+    title : "Judul 2",
+    description : "Description For Judul 2"
+  },
+  {
+    id: 3,
+    title : "Judul 3",
+    description : "Description For Judul 3"
+  }
+]
+
+
+const App = () => {
+
+  const [isActive, setActive] = useState(1)
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div>
+        {
+          data.map((val) => (
+            <div className="row-container" key={val.id}>
+              <div className="title">{val.title} <button onClick={() => setActive(val.id)}>Show</button></div>
+              <div className={`desc ${isActive === val.id ? `show`: `hide`}`}>{val.description}</div>
+            </div>
+          ))
+        }
+      </div>
     </div>
   );
 }
